@@ -7,8 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "phpoffice/phpexcel": "^1.8",
-        "mmoreram/extractor": "^1.2"
+        "mmoreram/extractor": "^1.2",
+        "comodojo/zip": "^2.0",
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

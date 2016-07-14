@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f9b92e489a1c81d825cec14203e707e7",
-    "content-hash": "4f1162da4b2d2c0bcd754ca5f847ac66",
+    "hash": "6d06ae3e32c5c75d7f3e96b7dcc793f3",
+    "content-hash": "bfe7a68eb1a4c10993c196d0b576180e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -60,6 +60,103 @@
                 "preload"
             ],
             "time": "2015-11-09 22:51:51"
+        },
+        {
+            "name": "comodojo/exceptions",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/comodojo/exceptions.git",
+                "reference": "4f6ac344305b59a88d28970f995739ef14e20998"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/comodojo/exceptions/zipball/4f6ac344305b59a88d28970f995739ef14e20998",
+                "reference": "4f6ac344305b59a88d28970f995739ef14e20998",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Comodojo\\Exception\\": "src/Exception"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Giovinazzi",
+                    "email": "marco.giovinazzi@comodojo.org",
+                    "homepage": "http://jme.altervista.org"
+                },
+                {
+                    "name": "Marco Castiello",
+                    "email": "marco.castiello@gmail.com"
+                }
+            ],
+            "description": "Common exceptions for comodojo libs and frameworks",
+            "homepage": "https://comodojo.org",
+            "keywords": [
+                "comodojo",
+                "exception"
+            ],
+            "time": "2016-01-31 18:50:38"
+        },
+        {
+            "name": "comodojo/zip",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/comodojo/zip.git",
+                "reference": "bb97b258ece84bb42ccb9c28f3f1c2c03d550339"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/comodojo/zip/zipball/bb97b258ece84bb42ccb9c28f3f1c2c03d550339",
+                "reference": "bb97b258ece84bb42ccb9c28f3f1c2c03d550339",
+                "shasum": ""
+            },
+            "require": {
+                "comodojo/exceptions": "@stable",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Comodojo\\Zip\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Giovinazzi",
+                    "email": "marco.giovinazzi@comodojo.org",
+                    "homepage": "http://jme.altervista.org"
+                }
+            ],
+            "description": "ZipArchive toolbox",
+            "homepage": "https://comodojo.org",
+            "keywords": [
+                "merge",
+                "multiple",
+                "unzip",
+                "zip",
+                "ziparchive"
+            ],
+            "time": "2015-12-17 09:52:48"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -517,6 +614,74 @@
                 "storage"
             ],
             "time": "2016-06-03 19:11:39"
+        },
+        {
+            "name": "maatwebsite/excel",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
+                "reference": "aae17dbd6f39606cf8f588359a7a79438ab5aa53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/aae17dbd6f39606cf8f588359a7a79438ab5aa53",
+                "reference": "aae17dbd6f39606cf8f588359a7a79438ab5aa53",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "5.0.*|5.1.*|5.2.*",
+                "illuminate/config": "5.0.*|5.1.*|5.2.*",
+                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*",
+                "illuminate/support": "5.0.*|5.1.*|5.2.*",
+                "nesbot/carbon": "~1.0",
+                "php": ">=5.5",
+                "phpoffice/phpexcel": "1.8.*",
+                "tijsverkoyen/css-to-inline-styles": "~1.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "orchestra/testbench": "3.1.*",
+                "phpseclib/phpseclib": "~1.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "illuminate/http": "5.0.*|5.1.*|5.2.*",
+                "illuminate/queue": "5.0.*|5.1.*|5.2.*",
+                "illuminate/routing": "5.0.*|5.1.*|5.2.*",
+                "illuminate/view": "5.0.*|5.1.*|5.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/Maatwebsite/Excel",
+                    "tests/TestCase.php"
+                ],
+                "psr-0": {
+                    "Maatwebsite\\Excel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maatwebsite.nl",
+                    "email": "patrick@maatwebsite.nl"
+                }
+            ],
+            "description": "An eloquent way of importing and exporting Excel and CSV in Laravel 4 with the power of PHPExcel",
+            "keywords": [
+                "PHPExcel",
+                "batch",
+                "csv",
+                "excel",
+                "export",
+                "import",
+                "laravel"
+            ],
+            "time": "2016-03-01 17:45:44"
         },
         {
             "name": "mmoreram/extractor",
@@ -1009,23 +1174,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -1058,7 +1223,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/console",
@@ -1119,6 +1284,59 @@
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
             "time": "2016-06-29 07:02:21"
+        },
+        {
+            "name": "symfony/css-selector",
+            "version": "v3.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "b8999c1f33c224b2b66b38253f5e3a838d0d0115"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b8999c1f33c224b2b66b38253f5e3a838d0d0115",
+                "reference": "b8999c1f33c224b2b66b38253f5e3a838d0d0115",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\CssSelector\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-François Simon",
+                    "email": "jeanfrancois.simon@sensiolabs.com"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony CssSelector Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-06-29 05:40:00"
         },
         {
             "name": "symfony/debug",
@@ -1840,6 +2058,53 @@
             "time": "2016-06-29 05:40:00"
         },
         {
+            "name": "tijsverkoyen/css-to-inline-styles",
+            "version": "1.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tijsverkoyen/CssToInlineStyles.git",
+                "reference": "9753fc340726e327e4d48b7c0604f85475ae0bc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/9753fc340726e327e4d48b7c0604f85475ae0bc3",
+                "reference": "9753fc340726e327e4d48b7c0604f85475ae0bc3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/css-selector": "~2.1|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TijsVerkoyen\\CssToInlineStyles\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Tijs Verkoyen",
+                    "email": "css_to_inline_styles@verkoyen.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
+            "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
+            "time": "2015-12-08 16:14:14"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v2.3.0",
             "source": {
@@ -1891,103 +2156,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "comodojo/exceptions",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/comodojo/exceptions.git",
-                "reference": "4f6ac344305b59a88d28970f995739ef14e20998"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/comodojo/exceptions/zipball/4f6ac344305b59a88d28970f995739ef14e20998",
-                "reference": "4f6ac344305b59a88d28970f995739ef14e20998",
-                "shasum": ""
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "scrutinizer/ocular": "~1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Comodojo\\Exception\\": "src/Exception"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Giovinazzi",
-                    "email": "marco.giovinazzi@comodojo.org",
-                    "homepage": "http://jme.altervista.org"
-                },
-                {
-                    "name": "Marco Castiello",
-                    "email": "marco.castiello@gmail.com"
-                }
-            ],
-            "description": "Common exceptions for comodojo libs and frameworks",
-            "homepage": "https://comodojo.org",
-            "keywords": [
-                "comodojo",
-                "exception"
-            ],
-            "time": "2016-01-31 18:50:38"
-        },
-        {
-            "name": "comodojo/zip",
-            "version": "2.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/comodojo/zip.git",
-                "reference": "bb97b258ece84bb42ccb9c28f3f1c2c03d550339"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/comodojo/zip/zipball/bb97b258ece84bb42ccb9c28f3f1c2c03d550339",
-                "reference": "bb97b258ece84bb42ccb9c28f3f1c2c03d550339",
-                "shasum": ""
-            },
-            "require": {
-                "comodojo/exceptions": "@stable",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "scrutinizer/ocular": "~1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Comodojo\\Zip\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Giovinazzi",
-                    "email": "marco.giovinazzi@comodojo.org",
-                    "homepage": "http://jme.altervista.org"
-                }
-            ],
-            "description": "ZipArchive toolbox",
-            "homepage": "https://comodojo.org",
-            "keywords": [
-                "merge",
-                "multiple",
-                "unzip",
-                "zip",
-                "ziparchive"
-            ],
-            "time": "2015-12-17 09:52:48"
-        },
         {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
@@ -3150,59 +3318,6 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2015-06-21 13:59:46"
-        },
-        {
-            "name": "symfony/css-selector",
-            "version": "v3.0.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b8999c1f33c224b2b66b38253f5e3a838d0d0115"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b8999c1f33c224b2b66b38253f5e3a838d0d0115",
-                "reference": "b8999c1f33c224b2b66b38253f5e3a838d0d0115",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\CssSelector\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jean-François Simon",
-                    "email": "jeanfrancois.simon@sensiolabs.com"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony CssSelector Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-06-29 05:40:00"
         },
         {
             "name": "symfony/dom-crawler",

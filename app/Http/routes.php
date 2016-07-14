@@ -11,18 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::group(['prefix' => 'import'], function(){
     Route::get('excel', 'Import@view');
-    Route::get('upload/file', 'Import@upload');
+    Route::post('upload', 'Import@upload');
+    Route::get('unzip', 'Import@unzip');
     Route::get('upload/list', 'Import@list_files');
     Route::get('upload/process', 'Import@process');
+    Route::get('upload/movePhotos', 'Import@movePhotos');
 });
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', ['middleware' => 'auth', 'uses' => 'HomeController@index']);
