@@ -11,13 +11,18 @@
 |
 */
 
-Route::group(['prefix' => 'import'], function(){
+Route::group(['prefix' => 'import', 'middleware' => 'auth'], function(){
     Route::get('excel', 'Import@view');
     Route::post('upload', 'Import@upload');
     Route::get('unzip', 'Import@unzip');
     Route::get('upload/list', 'Import@list_files');
     Route::get('upload/process', 'Import@process');
     Route::get('upload/movePhotos', 'Import@movePhotos');
+});
+
+Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function(){
+    Route::get('lot/{id}', 'Manager@index');
+    Route::get('save', 'Manager@processStudents');
 });
 
 Route::auth();

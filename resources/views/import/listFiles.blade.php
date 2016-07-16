@@ -81,7 +81,7 @@
                     method: 'GET',
                     params: {
                         f911    : objFiles.f911,
-                        fcalif  : objFiles.f911,
+                        fcalif  : objFiles.fcalif,
                         dir     : objFiles.dir
                     }
                 });

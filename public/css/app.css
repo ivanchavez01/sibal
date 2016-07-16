@@ -1,0 +1,25 @@
+ul.steps {
+    list-style: none;
+    margin-left:-30px !important;
+}
+ul.steps li {
+    display: inline-block;
+    padding: 10px;
+}
+ul.steps li div.step-container {
+    padding: 10px;
+    background-color: #00796b;
+    color:#FFF;
+}
+ul.steps li.active div.step-container {
+    background-color: #eeeeee;
+    color:#000;
+}
+ul.steps li span {
+    float: left;
+    font-weight: bold;
+    margin-right:10px;
+}
+ul.steps li div.step-text {
+    float: left;
+}

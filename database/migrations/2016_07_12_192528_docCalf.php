@@ -12,14 +12,17 @@ class DocCalf extends Migration
      */
     public function up()
     {
-        Schema::create('doccalf', function(Blueprint $table){
-            $table->char('user_sibal', 12);
-            $table->integer('lot_id')->unsigned();
-            $table->integer('matters_id')->unsigned();
-            $table->longText('data');
-            $table->date('created_at');
-            $table->date('updated_at');
-        });
+        if(!Schema::hasTable('doccalf'))
+        {
+            Schema::create('doccalf', function(Blueprint $table){
+                $table->char('user_sibal', 12);
+                $table->integer('lot_id')->unsigned();
+                $table->integer('matters_id')->unsigned();
+                $table->longText('data');
+                $table->date('created_at');
+                $table->date('updated_at');
+            });
+        }
     }
 
     /**
@@ -29,6 +32,6 @@ class DocCalf extends Migration
      */
     public function down()
     {
-        Schema::drop('doccalf');
+        //Schema::drop('doccalf');
     }
 }

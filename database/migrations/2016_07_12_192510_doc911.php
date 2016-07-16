@@ -12,13 +12,16 @@ class Doc911 extends Migration
      */
     public function up()
     {
-        Schema::create('doc911', function(Blueprint $table){
-            $table->char('user_sibal', 12);
-            $table->integer('lot_id')->unsigned();
-            $table->longText('data');
-            $table->date('created_at');
-            $table->date('updated_at');
-        });
+        if(!Schema::hasTable('doc911'))
+        {
+            Schema::create('doc911', function(Blueprint $table){
+                $table->char('user_sibal', 12);
+                $table->integer('lot_id')->unsigned();
+                $table->longText('data');
+                $table->date('created_at');
+                $table->date('updated_at');
+            });
+        }
     }
 
     /**
@@ -28,6 +31,6 @@ class Doc911 extends Migration
      */
     public function down()
     {
-        Schema::drop('doc911');
+        //Schema::drop('doc911');
     }
 }

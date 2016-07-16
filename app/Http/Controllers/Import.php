@@ -39,6 +39,8 @@ class Import extends Controller
       {
         return response()->json(["status" => "success", "filename" => $filename]);
       }
+
+      return response()->json(["status" => "error"]);
     }
 
 
@@ -110,8 +112,8 @@ class Import extends Controller
     protected function process_911($file, $dir) 
     {
       $filename = "tmp/".$dir."/".$file;
-      Excel::selectSheetsByIndex(0)->load(base_path($filename), function($sheet) {
-        $sheet->each(function($row){
+      Excel::selectSheetsByIndex(0)->load(base_path($filename), function($sheet1) {
+        $sheet1->each(function($row){
           $id = $row->usuario;
           $data = json_encode($row);
 
@@ -127,33 +129,26 @@ class Import extends Controller
     protected function process_calif($file, $dir) 
     {
       $filename = "tmp/".$dir."/".$file;
+      
       Excel::load(base_path($filename), function($book) {
-        
-        $book->each(function($sheet){
-          $matters_id = $sheet->getTitle();
-          if(isset($sheet->alumno))
-          {
-              $doc_calif = new \App\DocCalf();
-              $doc_calif->user_sibal = $row->usuario;
-              $doc_calif->data = json_encode($row);
-              $doc_calif->lot_id = $this->lot;
-              $doc_calif->matters_id = $matters_id;        
-              $doc_calif->save();
-          }
-          else 
-          {
-            $sheet->each(function($row) use($matters_id){
+        $sheet_index_virtual = microtime();
+
+        $book->each(function($sheet2){
+  
+          $matters_id = $sheet2->getTitle();
+         
+            $sheet2->each(function($row) use($matters_id){
               if(isset($row->usuario))
               {
                 $doc_calif = new \App\DocCalf();
                 $doc_calif->user_sibal = $row->usuario;
                 $doc_calif->data = json_encode($row);
                 $doc_calif->lot_id = $this->lot;
-                $doc_calif->matters_id = $matters_id;        
+                $doc_calif->matters_id = ($matters_id == "") ? $sheet_index_virtual : $matters_id;        
                 $doc_calif->save();
               }
             });
-          }
+          
           
         });
       });
