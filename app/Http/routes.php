@@ -22,7 +22,9 @@ Route::group(['prefix' => 'import', 'middleware' => 'auth'], function(){
 
 Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function(){
     Route::get('lot/{id}', 'Manager@index');
-    Route::get('save', 'Manager@processStudents');
+    Route::get('wsclients', 'Manager@wsclients');
+    Route::get('lot/template/step1', 'Manager@template_step1');
+    Route::post('save', 'Manager@processStudents');
 });
 
 Route::auth();

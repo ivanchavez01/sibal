@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+<script type="text/javascript" src="{{url('/bower_components/moment/min/moment.min.js')}}"></script>
+<script type="text/javascript" src="{{url('/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+<link rel="stylesheet" href="{{url('/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}" />
+
+    <div class="container" ng-app="configActas" ng-controller="actasSteps">
         <h3>Configuraci&oacute;n de actas</h3>
         <br />
 
@@ -35,10 +39,18 @@
                     </div>
                 </li>
             </ul>
+
+             <div>
+                <button class="btn btn-primary pull-right" ng-click="next()">
+                    <span ng-if="step == 1">Siguiente ></span>
+                    <span ng-if="step == 2">Guardar</span>
+                </button>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
 
-        <div class="row">
+        <div class="row step1" ng-if="step == 1">
             <div class="col-md-6">
                 <h4>Alumnos</h4>
                 <small>Se agregar&aacute;n {{count($students)}} alumnos. </small>
@@ -58,14 +70,11 @@
                 @endif
             </div>
             <div class="col-md-6">
-                 <div>
-                    <button class="btn btn-primary pull-right">
-                        Siguiente >
-                    </button>
-                </div>
-                <div class="clearfix"></div>
 
                 <form name="configActas">
+                    <br>
+                    <br>
+                    <br>
                     <div class="form-group">
                         <label for="#">
                             Plan de Estudios
@@ -83,7 +92,7 @@
                                 <option value="1">2013-08</option>
                             </select>
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">{{trans('buttons.add_ciclo')}}</button>
+                                <button class="btn btn-default btn-add-ciclo" type="button">{{trans('buttons.add_ciclo')}}</button>
                             </span>
                         </div>
                     </div>
@@ -95,7 +104,112 @@
                 </div>
             </div>
         </div>
+        <!-- step1 -->
 
-       
+
+        <div class="row step2">
+            <table class="table">
+                <thead>
+                    <th>Materia</th>
+                    <th>Maestro</th>
+                </thead>
+                <tbody>
+                @foreach($matters as $matter)
+                    <tr>
+                        <td>{{$matter->nombre_materia}}</td>
+                        <td>
+                            @if($teachers->count() > 0)
+                            <select name="sl_maestros[{{$matter->materia_id}}]" class="form-control">
+                                @foreach($teachers as $teacher)
+                                    {{--*/ 
+                                        $selected = " selected='selected'";
+
+                                        if($matter->maestro_id != $teacher->maestro_id)
+                                            $selected = "";
+                                    /*--}}
+                                    <option value="{{$teacher->maestro_id}}" {{$selected}}>{{$teacher->nombre_maestro}}</option>
+                                @endforeach
+                            </select>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+
     </div>
+
+<div class="modal fade modal-add-ciclo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Agregar nuevo ciclo</h4>
+        </div>
+        <div class="modal-body">
+            <form action="#" name="formCiclo">
+                <div class="form-group">
+                    <label for="dp_ciclo">Ciclo</label>
+                    
+                    <div class="input-group datepicker">
+                        <input type="text" class="form-control" data-date-format="YYYY-MM">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src='{{url("bower_components/socket.io-client/socket.io.js")}}'></script>
+<script>
+var socket = io.connect("http://localhost:3000");
+
+socket.on('message', function(){
+    alert("hay un nuevo mensaje");
+});
+
+
+$(document).ready(function(){
+    $(".datepicker").datetimepicker();
+
+    $(".btn-add-ciclo").click(function(){
+        $(".modal-add-ciclo").modal("show");
+    });
+});
+</script>
+
+<script>
+    app = angular.module('configActas', [])
+    app.config(function($interpolateProvider){
+        $interpolateProvider.startSymbol("{#");
+        $interpolateProvider.endSymbol("#}");
+    });
+
+    app.controller('actasSteps', function($scope){
+        $scope.step = 1;
+
+        $scope.next = function() {
+            if($scope.step < 2){
+                $scope.step++;
+            }else{
+                save();
+            }
+        }
+
+        function save(){
+            // $http({
+                
+            // });
+        }
+    });
+</script>
 @stop

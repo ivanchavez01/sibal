@@ -5,4 +5,6 @@
 Homestead.yaml
 Homestead.json
 .env
+public/bower_components/*
 /.vscode/*
+websocket/node_modules/*

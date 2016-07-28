@@ -16,6 +16,7 @@ class Materias extends Migration
                 $table->increments('materia_id');
                 $table->string('clave_materia', 20);
                 $table->string('nombre_materia', 50);
+                $table->integer('maestro_id');
                 $table->boolean('activo');
         });
     }
