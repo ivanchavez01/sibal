@@ -35,8 +35,8 @@ class Import extends Controller
 
       $file = $req->file('file');
       $filename = $file->getClientOriginalName();
-      if($file->move(base_path('tmp'), $filename))
-      {
+
+      if($file->move(base_path('tmp'), $filename)) {
         return response()->json(["status" => "success", "filename" => $filename]);
       }
 
@@ -114,14 +114,18 @@ class Import extends Controller
       $filename = "tmp/".$dir."/".$file;
       Excel::selectSheetsByIndex(0)->load(base_path($filename), function($sheet1) {
         $sheet1->each(function($row){
-          $id = $row->usuario;
-          $data = json_encode($row);
+          
+          if(isset($row->usuario) && $row->usuario != null)
+          {
+            $id = $row->usuario;
+            $data = json_encode($row);
 
-          $doc_index = new \App\Doc911();
-          $doc_index->user_sibal = $id;
-          $doc_index->data = $data;
-          $doc_index->lot_id = $this->lot;
-          $doc_index->save();
+            $doc_index = new \App\Doc911();
+            $doc_index->user_sibal = $id;
+            $doc_index->data = $data;
+            $doc_index->lot_id = $this->lot;
+            $doc_index->save();
+          }
         });
       });
     }
@@ -138,7 +142,7 @@ class Import extends Controller
           $matters_id = $sheet2->getTitle();
          
             $sheet2->each(function($row) use($matters_id){
-              if(isset($row->usuario))
+              if(isset($row->usuario) && $row->usuario != null)
               {
                 $doc_calif = new \App\DocCalf();
                 $doc_calif->user_sibal = $row->usuario;

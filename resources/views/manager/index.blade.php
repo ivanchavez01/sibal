@@ -50,7 +50,8 @@
         </div>
 
 
-        <div class="row step1" ng-if="step == 1">
+        <div class="row step1" ng-show="step == 1">
+            {{ csrf_field() }}
             <div class="col-md-6">
                 <h4>Alumnos</h4>
                 <small>Se agregar&aacute;n {{count($students)}} alumnos. </small>
@@ -89,7 +90,11 @@
                         </label>
                         <div class="input-group">
                             <select name="sl_ciclo" id="sl_ciclo" class="form-control">
-                                <option value="1">2013-08</option>
+                                @if($ciclos->count() > 0)
+                                    @foreach($ciclos->get() as $ciclo)
+                                        <option value="{{$ciclo->ID_Ciclo}}">{{$ciclo->nombre_ciclo}}</option>
+                                    @endforeach
+                                @endif
                             </select>
                             <span class="input-group-btn">
                                 <button class="btn btn-default btn-add-ciclo" type="button">{{trans('buttons.add_ciclo')}}</button>
@@ -100,14 +105,14 @@
 
 
                 <div class="alert alert-warning">
-                    Nota: Los registros aun no est&aacute;n han sido salvados, se encuentran de manera temporal.
+                    Nota: Los registros aun no est&aacute;n han sido salvados, se encuentran de manera temporal. 
                 </div>
             </div>
         </div>
         <!-- step1 -->
 
 
-        <div class="row step2">
+        <div class="row step2" ng-show="step == 2">
             <table class="table">
                 <thead>
                     <th>Materia</th>
@@ -119,15 +124,16 @@
                         <td>{{$matter->nombre_materia}}</td>
                         <td>
                             @if($teachers->count() > 0)
-                            <select name="sl_maestros[{{$matter->materia_id}}]" class="form-control">
+                            <select name="sl_maestros[{{$matter->ID_Materia}}]" data-id="{{$matter->ID_Materia}}" class="form-control materias">
                                 @foreach($teachers as $teacher)
+                                    
                                     {{--*/ 
                                         $selected = " selected='selected'";
-
-                                        if($matter->maestro_id != $teacher->maestro_id)
+                                        
+                                        if($matter->ID_Empleado_Default != $teacher->ID_Empleado)
                                             $selected = "";
                                     /*--}}
-                                    <option value="{{$teacher->maestro_id}}" {{$selected}}>{{$teacher->nombre_maestro}}</option>
+                                    <option value="{{$teacher->ID_Empleado}}" {{$selected}}>{{$teacher->nombre_empleado}}</option>
                                 @endforeach
                             </select>
                             @endif
@@ -194,7 +200,7 @@ $(document).ready(function(){
         $interpolateProvider.endSymbol("#}");
     });
 
-    app.controller('actasSteps', function($scope){
+    app.controller('actasSteps', function($scope, $http){
         $scope.step = 1;
 
         $scope.next = function() {
@@ -206,9 +212,28 @@ $(document).ready(function(){
         }
 
         function save(){
-            // $http({
-                
-            // });
+            var matters = [];
+
+            $("select.materias").each(function(){
+                matter = {
+                    metter_id: $(this).attr("data-id"),
+                    teacher_id: $(this).val()
+                };
+
+                matters.push(matter);
+            });
+
+             $http({
+                method: 'post',
+                url: "{{url('manager/process')}}",
+                data:{
+                    plan_id : $("#sl_planEstudio").val(),
+                    lot_id  : 1,
+                    ciclo_id: $("#sl_ciclo").val(),
+                    metters : matters,
+                    _token  : $("input[name=_token]").val()
+                }
+             });
         }
     });
 </script>

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Doc911;
 use App\DocCalf;
 use App\Teachers;
+use App\Ciclos;
 
 use App\Services\WebSocket\Client;
 
@@ -20,11 +21,13 @@ class Manager extends Controller
         $StudentsTmp    = \App\Doc911::where(["lot_id" => $id])->get();
         $matters        = DocCalf::onlyMatters()->get();
         $teachers       = Teachers::all();
+        $ciclos         = Ciclos::where(["activo" => 1]);
      
         return view('manager.index', [
             "students"  => $StudentsTmp, 
             "matters"   => $matters,
-            "teachers"  => $teachers
+            "teachers"  => $teachers,
+            "ciclos"    => $ciclos
         ]);
     }
 
@@ -38,11 +41,12 @@ class Manager extends Controller
     {
       if($this->use_queues)
       {
-          //implement queues: TODO
-          $doc911 = Doc911::where(["lot_id" => 2])->firstOrFail();
+          //crear cursos
+          $doc911 = Doc911::where(["lot_id" => $req->input("lot_id")])->firstOrFail();
           foreach($doc911->get() as $student) 
           {
-            $job = (new processStudents($doc911))->delay(5);
+            $data = ["student" => $student, "config" => $req->all()];
+            $job = (new processStudents($data))->delay(5);
             $this->dispatch($job);
           }
       }

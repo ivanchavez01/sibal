@@ -66,6 +66,15 @@ return [
             'engine' => null,
         ],
 
+        'sqlsrv' => [
+            'driver'   => 'sqlsrv',
+            'host'     => '127.0.0.1', 
+            'database' => 'sibal',
+            'username' => 'sa',
+            'password' => 'myPassword',
+            'prefix'   => '',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
