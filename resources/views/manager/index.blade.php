@@ -183,10 +183,8 @@ socket.on('message', function(){
     alert("hay un nuevo mensaje");
 });
 
-
 $(document).ready(function(){
     $(".datepicker").datetimepicker();
-
     $(".btn-add-ciclo").click(function(){
         $(".modal-add-ciclo").modal("show");
     });
@@ -219,7 +217,6 @@ $(document).ready(function(){
                     metter_id: $(this).attr("data-id"),
                     teacher_id: $(this).val()
                 };
-
                 matters.push(matter);
             });
 
@@ -228,7 +225,7 @@ $(document).ready(function(){
                 url: "{{url('manager/process')}}",
                 data:{
                     plan_id : $("#sl_planEstudio").val(),
-                    lot_id  : 1,
+                    lot_id  : 4,
                     ciclo_id: $("#sl_ciclo").val(),
                     metters : matters,
                     _token  : $("input[name=_token]").val()
