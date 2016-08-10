@@ -9,7 +9,12 @@ use App\Ciclos;
 class Alumnos extends Model
 {
     public $table = "alumnos";
-    public $primaryKey = "alumno_id";
+    public $primaryKey = "ID_alumno";
+
+
+    public function Expediente() {
+        return $this->hasMany("App\Expediente");
+    }
 
     public function scopeNewExpediente($query, $ciclo, $plantel = "24") {
         //ciclo,plantel,autoincrement(3 digitos)

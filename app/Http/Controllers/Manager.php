@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Jobs\processStudents;
 use App\Http\Requests;
+
 use App\Doc911;
 use App\DocCalf;
 use App\Teachers;
@@ -15,6 +16,7 @@ use App\Services\WebSocket\Client;
 class Manager extends Controller
 {
     public $use_queues = true;
+    public $data;
 
     public function index($id)
     {   
@@ -31,23 +33,19 @@ class Manager extends Controller
         ]);
     }
 
-    public function wsclients()
-    {
-        $ws_client = new Client();
-        dd($ws_client);
-    }
-
     public function processStudents(Request $req)
     {
       if($this->use_queues)
       {
-          //crear cursos
           $doc911 = Doc911::where(["lot_id" => $req->input("lot_id")])->firstOrFail();
-          foreach($doc911->get() as $student) 
+          if($doc911->count() > 0)
           {
-            $data = ["student" => $student, "config" => $req->all()];
-            $job = (new processStudents($data))->delay(5);
-            $this->dispatch($job);
+                foreach($doc911->get() as $student) 
+                {
+                    $data = ["student" => $student, "config" => $req->all()];
+                    $job = (new processStudents($data))->delay(5);
+                    $this->dispatch($job);
+                }
           }
       }
       else 

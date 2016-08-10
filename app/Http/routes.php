@@ -22,7 +22,6 @@ Route::group(['prefix' => 'import', 'middleware' => 'auth'], function(){
 
 Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function(){
     Route::get('lot/{id}', 'Manager@index');
-    Route::get('wsclients', 'Manager@wsclients');
     Route::post('save', 'Manager@processStudents');
     Route::post('process', 'Manager@processStudents');
 });
