@@ -11,6 +11,11 @@
 |
 */
 
+Route::group(['prefix' => 'documentos'], function(){
+    Route::get('actas', 'documents@actas');
+    Route::get('certificados', 'documents@certificados');
+});
+
 Route::group(['prefix' => 'import', 'middleware' => 'auth'], function(){
     Route::get('excel', 'Import@view');
     Route::post('upload', 'Import@upload');

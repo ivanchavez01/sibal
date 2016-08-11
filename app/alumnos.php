@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Expediente;
+use App\Cursos;
 use App\Ciclos;
 use Log;
 
@@ -14,7 +15,17 @@ class Alumnos extends Model
 
 
     public function Expediente() {
-        return $this->hasMany("App\Expediente");
+        return $this->hasMany("App\Expediente", 'ID_alumno');
+    }
+
+    public function Cursos() {
+        return $this->hasMany("App\Cursos", 'ID_alumno');
+    }
+
+
+    public function scopePromedio() {
+        //suma_calificaciones / count_mat
+        return round((1/1), 0, PHP_ROUND_HALF_DOWN);
     }
 
     public function scopeNewExpediente($query, $ciclo, $plantel = "24") {

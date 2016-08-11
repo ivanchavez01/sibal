@@ -13,4 +13,8 @@ class Expediente extends Model
     public function Alumno() {
         return $this->belongsTo("App\Alumnos");
     }
+
+    public function Materia(){
+        return $this->belongsTo("App\Materias", 'ID_Materia');
+    }
 }
