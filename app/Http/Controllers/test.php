@@ -10,7 +10,7 @@ use App\Alumnos;
 class test extends Controller
 {
     public function expediente() {
-        $expediente = Alumnos::NewExpediente($ciclo_id = '188');
+        $expediente = Alumnos::NewExpediente($ciclo_id = '126');
         dd($expediente);
     }
 

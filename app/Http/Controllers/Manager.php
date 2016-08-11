@@ -29,7 +29,8 @@ class Manager extends Controller
             "students"  => $StudentsTmp, 
             "matters"   => $matters,
             "teachers"  => $teachers,
-            "ciclos"    => $ciclos
+            "ciclos"    => $ciclos,
+            "lot_id"    => $id
         ]);
     }
 
@@ -37,7 +38,8 @@ class Manager extends Controller
     {
       if($this->use_queues)
       {
-          $doc911 = Doc911::where(["lot_id" => $req->input("lot_id")])->firstOrFail();
+          $doc911 = Doc911::where(["lot_id" => "2"])->firstOrFail();
+
           if($doc911->count() > 0)
           {
                 foreach($doc911->get() as $student) 

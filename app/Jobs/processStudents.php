@@ -59,6 +59,10 @@ class processStudents extends Job implements ShouldQueue
         $alumno->ID_Ciclo          = $this->data["config"]["ciclo_id"];
         $alumno->NoExpediente      = Alumnos::NewExpediente($this->data["config"]["ciclo_id"], $plantel = 24);
         
+        
+        Log:info("Creando alumno en el ciclo ".$this->data["config"]["ciclo_id"]." se genero el expediente: ".$alumno->NoExpediente);
+
+
         $alumno->etnia             = 0; //Etnias::FindOrCreate($this->data->data->nombre_etnia);
         $alumno->beca              = $this->data["student"]->data["tipo_beca"];
         $alumno->nombre_alumno     = $this->data["student"]->data["nombre"];
@@ -112,6 +116,9 @@ class processStudents extends Job implements ShouldQueue
                     $alumno->Expediente->calif = $expediente->data->calificacion;
                     $alumno->Expediente->tipo_calificacion = ($expediente->data->revalidada == "NO") ? 0 : 1;
                     $alumno->Expediente->save();
+                    //TODO: CREAR CURSO PARA GUARDAR LA RELACION DEL MAESTRO QUE IMPARTIO ESA MATERIA
+                    //TODO: SALVAR EL MAESTRO POR DEFAULT DE LA MATERIA ASIGNADA
+
                 } catch(Exception $ex) {
                     Log::info("Fallo: ".$expediente->matters_id.".");        
                 }

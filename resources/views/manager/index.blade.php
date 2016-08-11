@@ -225,7 +225,7 @@ $(document).ready(function(){
                 url: "{{url('manager/process')}}",
                 data:{
                     plan_id : $("#sl_planEstudio").val(),
-                    lot_id  : 4,
+                    lot_id  : {{$lot_id}},
                     ciclo_id: $("#sl_ciclo").val(),
                     metters : matters,
                     _token  : $("input[name=_token]").val()
