@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Excel;
+use PDF;
+
 class documents extends Controller
 {
     public function actas(){
@@ -14,7 +16,7 @@ class documents extends Controller
         return view("documentos.actas", ["alumnos" => $alumnos]);
     }
     public function certificados(){
-        $alumno_id = ['1363'];
+         $alumno_id = ['1363'];
         // $alumnos = \App\Alumnos::find($alumno_id);
                
         // return view("documentos.certificados", [
@@ -22,17 +24,24 @@ class documents extends Controller
         //     "fecha_expedicion" => date("Y-m-d")
         // ]);
 
-        Excel::create('New file', function($excel) use($alumno_id) {
-            $excel->sheet('New sheet', function($sheet) use($alumno_id) {
-                $alumnos = \App\Alumnos::find($alumno_id);
+        // Excel::create('New file', function($excel) use($alumno_id) {
+        //     $excel->sheet('New sheet', function($sheet) use($alumno_id) {
+        //         $alumnos = \App\Alumnos::find($alumno_id);
                
-                $sheet->loadView("documentos.certificados", [
-                    "alumnos" => $alumnos,
-                    "fecha_expedicion" => date("Y-m-d")
-                ]);
-            });
-        })
-        ->export("pdf");
+        //         $sheet->loadView("documentos.certificados", [
+        //             "alumnos" => $alumnos,
+        //             "fecha_expedicion" => date("Y-m-d")
+        //         ]);
+        //     });
+        // })
+        // ->export("xls");
+        $alumnos = \App\Alumnos::find($alumno_id);
+        $pdf = PDF::loadView('documentos.certificados', [
+            "alumnos" => $alumnos,
+            "fecha_expedicion" => date("Y-m-d")
+        ]);
+
+        return $pdf->stream();
        
     }
 }
