@@ -26,8 +26,7 @@ Route::group(['prefix' => 'import', 'middleware' => 'auth'], function(){
 });
 
 Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function(){
-    Route::get('lot/{id}', 'Manager@index');
-    Route::post('save', 'Manager@processStudents');
+    Route::get('lot/{id}', 'Manager@index'); 
     Route::post('process', 'Manager@processStudents');
 });
 

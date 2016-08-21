@@ -36,15 +36,16 @@ class Manager extends Controller
 
     public function processStudents(Request $req)
     {
+        ini_set('xdebug.max_nesting_level', 1000);
       if($this->use_queues)
       {
-          $doc911 = Doc911::where(["lot_id" => "2"])->firstOrFail();
+          $doc911 = Doc911::where(["lot_id" => $req->input("lot_id")])->firstOrFail();
 
           if($doc911->count() > 0)
           {
                 foreach($doc911->get() as $student) 
                 {
-                    $data = ["student" => $student, "config" => $req->all()];
+                    $data = ["student" => $student, "config" => $req->all()];                    
                     $job = (new processStudents($data))->delay(5);
                     $this->dispatch($job);
                 }

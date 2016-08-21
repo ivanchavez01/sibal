@@ -1,11 +1,19 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+html{ font-size:13px; padding-bottom:0px; margin-bottom:0px; }
+.calificaciones td{ padding: 0px; }
+</style>
 @if($alumnos->count() > 0)
     @foreach($alumnos as $alumno)
+    <br>
+    <br>
+    <br>
+    
         <table width="100%">
             <tr>
                 <td align="center">
-                    <b style="font-size:11px;">CLAVE DEL CENTRO DE TRABAJO: 26ECB1024P </b><br>
+                    <b style="font-size:12px;">CLAVE DEL CENTRO DE TRABAJO: 26ECB1024P </b><br><br>
                 </td>
             </tr>
             <tr>
@@ -15,14 +23,13 @@
             </tr>
             <tr>
                 <td align="center">
-                    <h2 style="font-size:16px;">
+                    <h2 style="font-size:18px;">
                         {{$alumno->nombre_alumno}} {{$alumno->ap_paterno}} {{$alumno->ap_materno}}
                     </h2>
                 </td>
             </tr>
             <tr>
                 <td align="justify">
-                    <br>
                     CON EXPEDIENTE {{$alumno->Noexpediente}}, CURSO {{($alumno->Expediente->count() >= 42) ? "TOTALMENTE" : "PARCIALMENTE"}} EL PLAN DE ESTUDIOS DE EDUCACION MEDIA SUPERIOR EN LINEA, OBTENIENDO LAS CALIFICACIONES QUE A CONTINUACION SE ANOTAN:
                 </td>
             </tr>
@@ -30,20 +37,23 @@
 
         <table width="100%" style="font-size:9px;">
             <tr>
-                <td width="28%">
-                   
-                    <br><br>
-                    <div style="font-size:8px; text-align:center;">
+                <td width="28%" valign="top">
+                    <div class="imagen" style="background:#000; height:180px; width:160px;">
+                        <img src="'.path_storage("app/public/students/".$this->img).'"  alt="test" width="41mm" height="48mm" border="0" >
+                    </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br>
+                    <div style="font-size:9px; text-align:center;">
                         Vo. Bo <br>
                         JEFE DEL DEPARTAMENTO DE <br>
                         CONTROL ESCOLAR
-                        <br>
+                        <br><br><br><br><br><br><br><br><br>
                         LIC. MARCO ANTONIO LEYVA RUIZ
                         <br>
                     </div>
                 </td>
                 <td width="72%">
-                    <table border="1" cellspacing="0" cellspadding="0">
+                    <table border="1" cellspacing="0" cellspadding="0" class="calificaciones">
                         <tr>
                             <td width="20%"><b style="font-size:12px;">MODULO</b> </td>
                             <td width="14%"><b style="font-size:12px;">CLAVE</b></td>
@@ -62,13 +72,13 @@
                                     @endif
                                     <td>{{trim($expediente->Materia->clave_materia)}}</td>
                                     <td>{{trim($expediente->Materia->nombre_materia)}}</td>
-                                    <td>{{$expediente->calif}}</td>
+                                    <td align="center">{{$expediente->calif}}</td>
                                 </tr>
                                 <?php $i++; ?>
                             @endforeach
                         @endif
                     </table>
-                    <table>
+                    <table width="100%">
                         <tr>
                             <td width="25%"></td>
                             <td width="10%"></td>
@@ -79,7 +89,12 @@
                 </td>			
             </tr>		
         </table>
-        <table width="100%" style="font-size:12px;">		
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table width="100%" style="font-size:13px;">		
 			<tr>
 				<td align="justify">
                     <p>
@@ -92,7 +107,7 @@
 				<td align="center">
 					<br>
 					DIRECTOR GENERAL
-					<br>
+					<br><br><br><br>    
 					<b>MTRO. VICTOR MARIO GAMIÑO CASILLAS</b>
 				</td>				
 			</tr>		

@@ -92,6 +92,8 @@ class Import extends Controller
 
     public function process(Request $req)
     {
+      ini_set('xdebug.max_nesting_level', 1000);
+
       $lot = new \App\Lots();
       $lot->dir = $req->input('dir');
       $lot->save();
@@ -144,6 +146,9 @@ class Import extends Controller
             $sheet2->each(function($row) use($matters_id){
               if(isset($row->usuario) && $row->usuario != null)
               {
+                
+                if(strlen($matters_id) > 8){ $matters_id = "0".$matters_id; }
+
                 $doc_calif = new \App\DocCalf();
                 $doc_calif->user_sibal = $row->usuario;
                 $doc_calif->data = json_encode($row);

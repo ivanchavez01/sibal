@@ -10,17 +10,17 @@ class Secundarias extends Model
 
     public function scopeFindOrCreate($query, $nombre_sec, $clave_sec) 
     {
-        $filters = ["nombre_secundaria" => $nombre_sec, "clave" => $clave_sec];
+        $filters = ["nombre_secundaria" => $nombre_sec, "clave_secundaria" => $clave_sec];
         $secundaria = $query->where($filters);
         
         if($secundaria->count() > 0) { 
-            return $secundaria->get()[0]->ID_secundaria;
+            return $secundaria->get()[0]->ID_Secundaria;
         } else {
-            $secundaria = new Secundarias();
-            $secundaria->nombre_secundaria  = $filters["nombre_secundaria"];
-            $secundaria->clave              = $filters["clave"];
-            $secundaria->save();
-            return $secundaria->ID_secundaria;
+            $secundarias = new Secundarias();
+            $secundarias->nombre_secundaria  = $nombre_sec;
+            $secundarias->clave_secundaria   = $clave_sec;
+            $secundarias->save();
+            return $secundarias->ID_Secundaria;
         }
     }
 }
