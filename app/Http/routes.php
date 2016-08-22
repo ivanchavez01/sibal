@@ -12,8 +12,8 @@
 */
 
 Route::group(['prefix' => 'documentos'], function(){
-    Route::get('actas', 'documents@actas');
-    Route::get('certificados', 'documents@certificados');
+    Route::get('actas', 'Documents@actas');
+    Route::get('certificado/{id}', 'Documents@certificados');
 });
 
 Route::group(['prefix' => 'import', 'middleware' => 'auth'], function(){

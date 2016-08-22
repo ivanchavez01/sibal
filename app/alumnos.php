@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Expediente;
 use App\Cursos;
 use App\Ciclos;
+use DB;
 use Log;
 
 class Alumnos extends Model
@@ -25,7 +26,8 @@ class Alumnos extends Model
 
     public function scopePromedio() {
         //suma_calificaciones / count_mat
-        return round((1/1), 0, PHP_ROUND_HALF_DOWN);
+        $promedio = $this->Expediente->sum("calif") / $this->Expediente->count();
+        return round($promedio, 0, PHP_ROUND_HALF_DOWN);
     }
 
     public function scopeNewExpediente($query, $ciclo, $plantel = "24") {

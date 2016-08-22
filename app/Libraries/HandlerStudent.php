@@ -46,7 +46,7 @@ class HandlerStudent
         $alumno->beca              = $this->data["student"]->data["tipo_beca"];
         $alumno->nombre_alumno     = $this->data["student"]->data["nombre"];
         $alumno->ap_paterno        = $this->data["student"]->data["apellido_paterno"];
-        $alumno->ap_materno        = $this->data["student"]->data["apellido_paterno"];
+        $alumno->ap_materno        = $this->data["student"]->data["apellido_materno"];
         $alumno->sexo              = ($this->data["student"]->data["sexo"] == "MASCULINO") ? 1 : 0;
         $alumno->curp              = $this->data["student"]->data["curp"];
         $alumno->cantidad_hijos    = (!is_integer($this->data["student"]->data["hijos"])) ? 0 : $this->data["student"]->data["hijos"];
