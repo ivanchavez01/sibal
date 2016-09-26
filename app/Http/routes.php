@@ -13,7 +13,8 @@
 
 Route::group(['prefix' => 'documentos'], function(){
     Route::get('actas', 'Documents@actas');
-    Route::get('certificado/{id}', 'Documents@certificados');
+    Route::get('certificado/{id}', 'Documents@certificado');
+    Route::post('certificados', 'Documents@certificados');
 });
 
 Route::group(['prefix' => 'import', 'middleware' => 'auth'], function(){
@@ -29,6 +30,12 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function(){
     Route::get('lot/{id}', 'Manager@index'); 
     Route::post('process', 'Manager@processStudents');
 });
+
+Route::group(['prefix' => 'students', 'middleware' => 'auth'], function(){
+    Route::get('browser', 'Students@browser');
+    Route::post('json/get', 'Students@json');
+});
+
 
 Route::group(['prefix' => 'test'], function(){
     Route::get('expediente', 'test@expediente');

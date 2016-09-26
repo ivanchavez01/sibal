@@ -1,9 +1,10 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style>
-html{ font-size:13px; padding-bottom:0px; margin-bottom:0px; margin-left:2px; }
-.calificaciones td{ padding-top:0px; padding-bottom: 1px; }
+html{ font-size:14px; padding-bottom:0px; margin-bottom:0px; margin-left:2px; margin-right:20px; font-family: 'helvetica'; }
+.calificaciones td{ padding-top:0px; padding-bottom: -1px; }
 img { width: 150px; }
+.thead td { font-size: 16px; font-weight:bolder; }
 .nombre-alumno{ 
     font-size:18px;
     font-weight: bold;
@@ -18,7 +19,8 @@ img { width: 150px; }
     <br>
     <br>
     
-        <table width="100%">
+    
+        <table width="100%" cellspacing="0" cellspadding="0" style="margin-bottom:10px;">
             <tr>
                 <td align="center">
                     <b style="font-size:12px;">CLAVE DEL CENTRO DE TRABAJO: 26ECB1024P </b><br><br>
@@ -43,30 +45,30 @@ img { width: 150px; }
             </tr>
         </table>
 
-        <table width="100%" style="font-size:9px;">
+        <table width="100%" style="font-size:9.5px;">
             <tr>
                 <td width="28%" valign="top">
                     <div class="imagen" style="height:180px; width:160px; color:#FFF;">                        
                         <img src="{{storage_path('app/public/students/'.$alumno->img)}}"  alt="{{$alumno->img}}" border="0" />
                     </div>
                     <br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br>
-                    <div style="font-size:9px; text-align:center;">
+                    <br><br><br><br><br><br><br><br>
+                    <div style="font-size:8px !important; text-align:center;">
                         Vo. Bo <br>
                         JEFE DEL DEPARTAMENTO DE <br>
                         CONTROL ESCOLAR
-                        <br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br><br>
                         LIC. MARCO ANTONIO LEYVA RUIZ
                         <br>
                     </div>
                 </td>
                 <td width="72%">
                     <table border="1" cellspacing="0" cellspadding="0" class="calificaciones">
-                        <tr>
-                            <td width="20%" valign="top"><b style="font-size:12px;">MODULO</b> </td>
-                            <td width="14%" valign="top"><b style="font-size:12px;">CLAVE</b></td>
-                            <td width="56%" valign="top"><b style="font-size:12px;">ASIGNATURAS</b></td>
-                            <td width="10%" valign="top"><b style="font-size:12px;">CALIF</b></td>
+                        <tr class="thead">
+                            <td width="20%" valign="top"><b style="font-size:13.5px;">MODULO</b> </td>
+                            <td width="14%" valign="top"><b style="font-size:13.5px;">CLAVE</b></td>
+                            <td width="56%" valign="top"><b style="font-size:13.5px;">ASIGNATURAS</b></td>
+                            <td width="10%" valign="top"><b style="font-size:13.5px;">CALIF</b></td>
                         </tr>
                         @if($alumno->Expediente)
                             <?php $i = 1; $modulo_id = 0; ?>
@@ -86,7 +88,7 @@ img { width: 150px; }
                             @endforeach
                         @endif
                     </table>
-                    <table width="100%">
+                    <table width="100%" style="margin-top:-5px">
                         <tr>
                             <td width="25%"></td>
                             <td width="10%"></td>
@@ -101,7 +103,7 @@ img { width: 150px; }
         <br>
         <br>
         <br>
-        <br>
+        
         <table width="100%" style="font-size:13px;">		
 			<tr>
 				<td align="justify">
@@ -118,7 +120,7 @@ img { width: 150px; }
 				<td align="center">
 					
 					DIRECTOR GENERAL
-					<br><br><br><br><br><br>    
+					<br><br><br><br><br><br><br>
 					<b>MTRO. VICTOR MARIO GAMIÑO CASILLAS</b>
 				</td>				
 			</tr>		
