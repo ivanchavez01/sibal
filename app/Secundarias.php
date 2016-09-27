@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Secundarias extends Model
 {
-    
+    public $table = "secundarias";
+    public $primaryKey = "ID_Secundaria";
 
     public function scopeFindOrCreate($query, $nombre_sec, $clave_sec) 
     {
-        $filters = ["nombre_secundaria" => $nombre_sec, "clave_secundaria" => $clave_sec];
-        $secundaria = $query->where($filters);
+        $filters = ["clave_secundaria" => $clave_sec];
+        $secundaria = $query->where($filters)->get();
         
-        if($secundaria->count() > 0) { 
-            return $secundaria->get()[0]->ID_Secundaria;
+        if(count($secundaria) > 0) {
+            return $secundaria[0]->ID_Secundaria;
         } else {
             $secundarias = new Secundarias();
             $secundarias->nombre_secundaria  = $nombre_sec;

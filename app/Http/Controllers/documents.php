@@ -10,10 +10,17 @@ use PDF;
 
 class Documents extends Controller
 {
-    public function actas(){
-        $alumno_id = ["1440", "1439", "1438"];
-        $alumnos = \App\Alumnos::find($alumno_id);
-        return view("documentos.actas", ["alumnos" => $alumnos]);
+    public function actas(Request $req){
+        $alumnos_id = [];
+        if(!empty($req->input("students"))) {
+            foreach($req->input("students") as $index => $value) {
+                if($value)
+                    $alumnos_id[] = $index;
+            }
+
+            $alumnos = \App\Alumnos::find($alumnos_id);
+            return view("documentos.actas", ["alumnos" => $alumnos]);
+        }
     }
 
     public function certificado($id){
