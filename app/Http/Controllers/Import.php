@@ -17,14 +17,13 @@ class Import extends Controller
 
     public $lot = 0;
 
-    public function view() 
-    {
+    public function view() {
       return view("import.view");
     }
 
 
-    public function upload(Request $req) 
-    {
+    public function upload(Request $req) {
+
       $validation = Validator::make($req->all(), [
         'file' => 'required|mimes:zip,rar'
       ]);
@@ -90,8 +89,7 @@ class Import extends Controller
       }
     }
 
-    public function process(Request $req)
-    {
+    public function process(Request $req) {
       ini_set('xdebug.max_nesting_level', 1000);
 
       $lot = new \App\Lots();

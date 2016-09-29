@@ -19,6 +19,8 @@ use DB;
 class HandlerStudent 
 {
     public $data;
+    public $cursos = [];
+
     public function process($data) 
     {
         try
@@ -78,14 +80,14 @@ class HandlerStudent
             $alumno->internet_fam      = $this->data["student"]->data["pc_con_familiares"];
             $alumno->nivel_PC          = $this->data["student"]->data["manejo_computadora"];
             $alumno->apoyo_fam         = $this->data["student"]->data["apoyo_familiar"];
-            
-            $alumno->fecha_nac         = $this->data["student"]->data["fecha_nacimiento"];
-            $alumno->fecha_ingreso_sibal= $this->data["student"]->data["fecha_alta"];
+            $alumno->fecha_nac         = $this->data["student"]->data["fecha_nacimiento"]["date"];
+            $alumno->fecha_ingreso_sibal= $this->data["student"]->data["fecha_alta"]["date"];
             $alumno->aporta_casa       = $this->data["student"]->data["aportacion"];
             $alumno->lugar_trabajo_padre= $this->data["student"]->data["lugar_trabajo_padre"];
             $alumno->img               = $this->data["student"]->data["usuario"].".jpg";
             $alumno->save();
-
+            
+            
             if(!isset($this->data["config"]["metters"]) OR empty($this->data["config"]["metters"])) {
                 DB::rollBack();
             }
@@ -100,11 +102,11 @@ class HandlerStudent
 
                 if($materia)
                 {
-                    $expediente = \App\DocCalf::where(["matters_id" => $materia->clave_materia]);
+                    $expediente = \App\DocCalf::where(["matters_id" => $materia->clave_materia])->get();
                     
-                    if($expediente->count() > 0)
+                    if(count($expediente) > 0)
                     {
-                        $expediente = $expediente->get()[0];                    
+                        $expediente = $expediente[0];                    
                         $expediente->data = json_decode($expediente->data);
                         
                         //si la clave de la materia es menor a 8 digitos
@@ -118,15 +120,17 @@ class HandlerStudent
                         $materia->ID_Empleado_Default = (int)$metters["teacher_id"];
                         $materia->save();
                         
-                        //Crear un nuevo curso
-                        /*$curso = new Cursos();
-                        $curso->ID_Materia  = $materia->ID_Materia;
-                        $curso->ID_Empleado = $metters["teacher_id"];
-                        $curso->ID_Ciclo    = $this->data["config"]["ciclo_id"];
-                        $curso->activo      = 1;
-                        $curso->save();
-                        $curso_id = $curso->ID_Curso;*/
-                        
+
+                        $curso_data = [
+                            "ID_Materia"    => $materia->ID_Materia,
+                            "ID_Empleado"   => $metters["teacher_id"],
+                            "ID_Ciclo"      => $this->data["config"]["ciclo_id"],
+                            "activo"        => 1
+                        ];
+
+                        $curso_id = Cursos::FindActiveOrCreate($curso_data);
+                        Log::info("CURSO ID GENERADO: ".$curso_id);
+
                         $alumno->Expediente = new Expediente();
                         $alumno->Expediente->ID_Alumno  = $alumno->ID_alumno;
                         $alumno->Expediente->ID_Materia = $materia->ID_Materia;

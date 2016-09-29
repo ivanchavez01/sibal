@@ -10,7 +10,7 @@ use App\Doc911;
 use App\DocCalf;
 use App\Teachers;
 use App\Ciclos;
-
+use DB;
 use App\Services\WebSocket\Client;
 
 class Manager extends Controller
@@ -37,24 +37,27 @@ class Manager extends Controller
     public function processStudents(Request $req)
     {
         ini_set('xdebug.max_nesting_level', 1000);
-      if($this->use_queues)
-      {
-          $doc911 = Doc911::where(["lot_id" => $req->input("lot_id")])->firstOrFail();
+        if($this->use_queues)
+        {
+            $doc911 = Doc911::where(["lot_id" => $req->input("lot_id")])->firstOrFail()->get();
 
-          if($doc911->count() > 0)
-          {
-                foreach($doc911->get() as $student) 
+            if(count($doc911) > 0)
+            {
+                //inactivamos cursos y creamos nuevos
+                DB::table("cursos")->where(["activo" => 1])->update(["activo" => 0]);
+
+                foreach($doc911 as $student) 
                 {
                     $data = ["student" => $student, "config" => $req->all()];                    
                     $job = (new processStudents($data))->delay(5);
                     $this->dispatch($job);
                 }
-          }
-      }
-      else 
-      {
-        $this->processStaticStudents($req);
-      }
+            }
+        }
+        else 
+        {
+            $this->processStaticStudents($req);
+        }
     }
 
     public function processStaticStudents(Request $req)
